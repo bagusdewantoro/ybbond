@@ -1,0 +1,35 @@
+{{ $dateformat := .Date.Format "2006-01-02 15:04" }}
+{{ $idslug := (print "date-" $dateformat "-") | urlize }}
+{{ $author := ""}}
+{{ if isset .Params.Destination "author" }}
+  {{ $author = print " by «" .Params.Destination.Author "»" }}
+{{ end }}
+{{ $resplink := print "In response to " "«" .Params.Destination.Title "»" $author ":" }}
+
+<article class="summary card h-entry">
+  <h2 class="card-heading">
+    {{ if eq .Type "responses" }}
+      Response  on
+    {{ else if eq .Type "notes"  }}
+      Notes on
+    {{ end }}
+    <time title="{{ .Date.Format "Monday, 02 January 2006 on 15:04:05" }} GMT+7" class="card__title__date dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05" }}+07:00">
+        {{ .Date.Format "02 Jan 2006" }}
+      </time>
+        {{ if .Title }}
+        {{ else }}
+          <a class="static u-url" href="/{{ .Page.Type }}/#{{ $idslug }}">#</a> <a class="static" href={{ .Permalink }}>»</a>
+        {{ end }}
+  </h2>
+  {{ if eq .Type "responses" }}
+    <p>{{ $resplink }}</p>
+    <hr>
+  {{ end }}
+  {{ .Content }}
+</article>
+
+<!--   <a class="button" role="button"
+    href="{{.Permalink}}"
+    data-rel="prefetch"
+    aria-label="keep reading {{.Title}}"><p>Read More »</p></a>
+ -->

@@ -1,47 +1,16 @@
 {{ define "main" }}
-  <div class="h-feed">
-    <div id="h-card" class="hcard" hidden="">
-      <img class="u-photo" src={{ "logo.png" | absURL }} alt="Weird photo of yohanes bandung" />
-      <a class="p-author h-card" href={{ .Site.Params.MainSiteURL }} rel="author">{{ substr .Site.Params.Author 0 20 }}.</a>
-      <a class="u-email" href="mailto:{{ .Site.Params.Email }}">{{ .Site.Params.Email }}</a>
-      <a rel="syndication" class="u-syndication" href={{ .Permalink }}>{{ .Title }}</a>
-      <span class="p-locality">Jakarta</span>, <span class="p-country-name">Indonesia</span>
-      {{ with .Params.tags }}
-        {{ range . }}
-          <a class="p-category" href={{ (printf  "tags/%s" .) | urlize | absURL }}>{{ . }}</a>
-        {{ end }}
-      {{ end }}
-    </div>
-  {{ $selflink := .Permalink }}
-  {{ if or .Title .Content }}
-    <div class="list__header content">
-      {{ $isTag := eq .Type "tags" }}
-      {{ with .Title }}
-        <a href={{ $selflink }} class="u-url no-outline">
-          <h1 class="p-name">
-              {{ cond $isTag "Tag «" nil}}{{ . }}{{ cond $isTag "»" nil}}
-          </h1>
-        </a>
-      {{ end }}
-      {{ with .Content }}<div>{{ . }}</div>{{ end }}
-    </div>
-    <hr class="list__subtitle">
-  {{ end }}
-
-  {{ if  eq .Type "notes" }}
-    {{ range (where .Site.RegularPages "Type" "notes") }}
-      {{ partial "post/notes-item.html" . }}
-    {{ end }}
-  {{ else if  eq .Type "responses" }}
-    {{ range (where .Site.RegularPages "Type" "responses") }}
-      {{ partial "post/responses-item.html" . }}
+  <article class="content">
+    {{.Content}}
+  </article>
+  <hr>
+  {{ if .IsHome }}
+    {{ range where (.Paginator 20).Pages "Type" "!=" "reports" }}
+      {{- partial "content/summary.html" . -}}
     {{ end }}
   {{ else }}
-    {{ range .Paginator.Pages }}
-      {{ partial "post/summary.html" . }}
-      <hr>
+    {{ range (.Paginator 20).Pages }}
+      {{- partial "content/summary.html" . -}}
     {{ end }}
-    {{ partial "post/pagination.html" . }}
   {{ end }}
-</div>
+  {{- partial "components/pagination.html" . -}}
 {{ end }}

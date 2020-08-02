@@ -1,0 +1,18 @@
+@import "variables";
+
+blockquote {
+  margin: inherit auto;
+  margin-left: 0;
+  padding: 0 1em;
+  border-left: 2px solid;
+  @include themify($themes) {
+    border-color: themed('color-red');
+  }
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.language-json {
+  font-size: 0.75rem;
+}

@@ -1,0 +1,25 @@
+@import "variables";
+
+.summary.card {
+  display: block;
+  @include themify($themes) {
+    outline: .3rem solid themed('color-background-hover');
+  }
+  padding: .3rem 1.4rem;
+  margin: 2rem 0;
+}
+.card-heading {
+  font-family: $font-mono;
+  font-weight: unset;
+  font-size: 1rem;
+  position: absolute;
+  margin-left: -.5rem;
+  margin-top: -1.2rem;
+  padding: 0 .5rem;
+  @include themify($themes) {
+    background: themed('color-background');
+  }
+  a {
+    text-decoration: none;
+  }
+}

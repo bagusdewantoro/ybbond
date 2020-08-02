@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html ⚡
-  lang="{{ .Site.LanguageCode | default "en-us" }}"
-  class="theme-dark"
-  id="main-theme"
->
+<html ⚡ lang="en-us" class="theme-dark" id="main-theme">
   <head>
-    {{ partial "head/head.html" . }}
+    {{- partial "head/head.html" . -}}
   </head>
   <body>
     <header class="header">
-      {{ partial "header/header.html" . }}
+      {{- partial "header/header.html" . -}}
     </header>
     <main class="main">
-      {{ block "main" . }}{{ end }}
+      {{- block "main" . }}{{- end }}
     </main>
-    <hr class="footer__separator">
     <footer class="footer">
-      {{ partial "footer/footer.html" . }}
+      {{- partial "footer/footer.html" . -}}
     </footer>
   </body>
 </html>

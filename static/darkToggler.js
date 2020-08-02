@@ -4,7 +4,6 @@
   const currentTheme = localStorage.getItem("theme");
 
   if (toggler && mainWrapper) {
-    toggler.className = "header__menu__list__toggler";
     toggler.onclick = function() {
       if (mainWrapper.className === "theme-light") {
         mainWrapper.className = "theme-dark";

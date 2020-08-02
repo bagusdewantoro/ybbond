@@ -1,64 +1,6 @@
 {{ define "main" }}
-  {{ if eq .Type "notes" }}
-    <article>
-      {{- partial "post/notes-item.html" . -}}
-      {{ partial "post/webmentions-handler.html" . }}
-    </article>
-  {{ else if eq .Type "responses" }}
-    <article>
-      {{- partial "post/responses-item.html" . -}}
-      {{ partial "post/webmentions-handler.html" . }}
-    </article>
-  {{ else }}
-    <article class="content h-entry">
-      <h1 class="p-name">{{ .Title }}</h1>
-      <div id="h-card" class="hcard" hidden="">
-        <img class="u-photo" src={{ "logo.png" | absURL }} alt="Weird photo of yohanes bandung" />
-        <a class="p-author h-card" href={{ .Site.Params.MainSiteURL }} rel="author">{{ substr .Site.Params.Author 0 20 }}.</a>
-        <a class="u-email" href="mailto:{{ .Site.Params.Email }}">{{ .Site.Params.Email }}</a>
-        <a rel="syndication" class="u-syndication" href={{ .Permalink }}>{{ .Title }}</a>
-        <span class="p-locality">Jakarta</span>, <span class="p-country-name">Indonesia</span>
-        {{ with .Params.tags }}
-          {{ range . }}
-            <a class="p-category" href={{ (printf  "tags/%s" .) | urlize | absURL }}>{{ . }}</a>
-          {{ end }}
-        {{ end }}
-      </div>
-      <div class="p-content e-content">
-        {{ partial "components/content.html" .Content }}
-      </div>
-
-      <div class="bottom-hcard-container" {{ if eq .Type "page" }} hidden=""{{ end }}>
-        <p class="hcard-top hcard">
-          <a class="u-url link-white" href={{ .Permalink }}>Published</a> on
-          <time title="{{ .Date.Format "Monday, 02 January 2006 on 15:04:05" }} GMT+7" class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05" }}+07:00">
-            {{ .Date.Format "02 January 2006" }}</time>,
-          tagged:
-          {{ with .Params.tags }}
-            <span class="hcard-tags">
-              {{ range . }}
-                {{- partial "components/tagitem.html" . -}}
-              {{ end }}
-            </span>
-          {{ end }}
-        </p>
-        {{ if ne .Type "page" -}}
-          {{- if isset .Params.Twitter "link" }}
-            <p class="twitter-link"><strong>Comment is unavailable for now</strong>, sorry :( You can reply this tweet, that will be linked to this post: <a target="_blank" rel="nofollow noreferrer" href={{ .Params.Twitter.Link }}>»Twitter Link«</a></p>
-            {{ if isset .Params.Mastodon "link" -}}
-            <p class="mastodon-link">If you prefer fediverse, you can reply this Toot instead: <a target="_blank" rel="nofollow noreferrer" href={{ .Params.Mastodon.Link }}>»Mastodon Link«</a></p>
-            {{ end -}}
-          {{- end }}
-          <p class="hcard-bottom">If you have any feedback, please contact me at <a title="Open default mail client and add my email as recipient" href="mailto:hi@ybbond.dev">hi@ybbond.dev</a></p>
-        {{ end -}}
-      </div>
-
-      {{- if ne .Type "page" }}
-        {{ partial "post/webmentions-handler.html" . }}
-      {{- else }}
-        <br>
-        <br>
-      {{- end }}
-    </article>
-  {{ end }}
+  <article class="content">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </article>
 {{ end }}

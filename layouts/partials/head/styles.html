@@ -1,0 +1,20 @@
+<style>
+  {{ with resources.Get "styles.scss" | resources.ToCSS | resources.Minify }}
+    {{ .Content | safeCSS }}
+  {{ end }}
+  {{ if or .Page.IsHome (or (eq .Page.Type "notes") (eq .Page.Type "responses")) }}
+    {{ with resources.Get "content-card.scss" | resources.ToCSS | resources.Minify }}
+      {{ .Content | safeCSS }}
+    {{ end }}
+  {{ end }}
+  {{- if and (or (eq .Page.Type "posts") (eq .Page.Type "reports")) (eq .Page.Kind "page") -}}
+    {{ with resources.Get "content-posts.scss" | resources.ToCSS | resources.Minify }}
+      {{ .Content | safeCSS }}
+    {{ end }}
+  {{- end -}}
+  {{ if  (eq .Page.Kind "page") }}
+    {{ with resources.Get "content.scss" | resources.ToCSS | resources.Minify }}
+      {{ .Content | safeCSS }}
+    {{ end }}
+  {{ end }}
+</style>

@@ -1,36 +1,27 @@
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <title>{{ with or (.Page.Title) (.Site.Title) }}{{ . }} ::{{ end }} {{ .Site.Params.Author }}</title>
 <meta
   name="description"
-  content="{{if .IsHome}}{{ .Site.Params.Description }}{{ else if .Params.description }}{{ .Params.description }}{{else}}{{ .Summary }} →{{end}}"
+  content="{{if .IsHome}}{{ .Site.Params.Description }}{{ else if .Params.description }}{{ .Params.description }}{{else}}{{ .Summary }} »{{end}}"
 />
 {{ with .Site.Params.Author }}
   <meta name="author" content="{{ . }}">
 {{ end }}
 
+<script type="application/javascript" src="{{ .Site.BaseURL }}darkToggler.js" async="true"></script>
+<link rel="preload" href="https://cdn.ybbond.dev">
+
 {{ with .OutputFormats.Get "rss" }}
-    {{ $rssTitle := printf "%s RSS" $.Site.Title }}
-    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $rssTitle | safeHTML }}
+  {{ $rssTitle := printf "%s RSS" $.Site.Title }}
+  {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $rssTitle | safeHTML }}
 {{ end }}
 
-<script type="application/javascript" src="{{ .Site.BaseURL }}darkToggler.js" async="true"></script>
-<script type="application/javascript" src="{{ .Site.BaseURL }}lazyImage.js" async="true"></script>
-
-<style>
-  {{ with resources.Get "styles.scss" | resources.ToCSS | resources.Minify }}
-      {{ .Content | safeCSS }}
-  {{ end }}
-</style>
+{{ partial "head/styles.html" . }}
 <link href="/fontawesome.min.css" rel="stylesheet">
 <link href="/brands.min.css" rel="stylesheet">
 
-
-<link rel="canonical" href="{{ .Permalink }}" />
+<link rel="canonical" href="https://ybbond.dev{{ .RelPermalink }}" >
 <link rel="sitemap" href="{{ "sitemap.xml" | absURL }}" type="application/xml" />
-
-{{ partial "head/auth-links.html" . }}
-{{ partial "head/og-metas.html" . }}
-{{ partial "head/twitter-card-metas.html" . }}

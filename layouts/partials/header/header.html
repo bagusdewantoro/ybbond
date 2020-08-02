@@ -1,32 +1,47 @@
-{{ if .IsHome }}
-  <h1 class="header__title">Yohanes Bandung Bondowoso</h1>
-{{ else }}
-  <h2 class="header__title">Yohanes Bandung Bondowoso</h2>
-{{ end }}
-<nav class="header__menu">
-  <div class="header__menu__list">
-    <span>
-      {{ range .Site.Menus.main }}
-        {{ $url := trim .URL "/" | absURL }}
-        <a
-          data-rel="prefetch"
-          role="button"
-          class="header__menu__list__item button no-outline"
-          {{ if eq $.RelPermalink (print .URL "/") }}
-            id="active"
-          {{ else }}
-            href={{ $url }}
-          {{ end }}
-        >
-          {{ .Pre }}<span>{{ .Name }}</span>
-        </a>
-      {{ end }}
-    </span>
+<nav>
+  <div class="header__upper">
+    {{ if .IsHome }}
+      <h1 class="header__title">Yohanes Bandung Bondowoso</h1>
+    {{ else }}
+      <h2 class="header__title">Yohanes Bandung Bondowoso</h2>
+    {{ end }}
     <button
-      class="header__menu__list__toggler__off"
+      class="header__toggler"
       id="dark-toggler"
+      title="Toggle light theme for this website."
     >
       🌛
     </button>
+  </div>
+  <details class="mobile">
+    <summary>Menus</summary>
+    {{ range .Site.Menus.main }}
+      {{ $url := trim .URL "/" | absURL }}
+      <button
+        data-rel="prefetch"
+        {{ if eq $.RelPermalink (print .URL "/") }}
+          id="active"
+        {{ else }}
+          onclick="window.location.href='{{ $url }}'"
+        {{ end }}
+      >
+        {{ .Pre }}<span>{{ .Name }}</span>
+      </button>
+    {{ end }}
+  </details>
+  <div class="desktop">
+    {{ range .Site.Menus.main }}
+      {{ $url := trim .URL "/" | absURL }}
+      <button
+        data-rel="prefetch"
+        {{ if eq $.RelPermalink (print .URL "/") }}
+          id="active"
+        {{ else }}
+          onclick="window.location.href='{{ $url }}'"
+        {{ end }}
+      >
+        {{ .Pre }}<span>{{ .Name }}</span>
+      </button>
+    {{ end }}
   </div>
 </nav>

@@ -1,0 +1,15 @@
+{{ $totalList := 10 }}
+{{ if .IsHome }}
+  {{ $totalList = 20 }}
+{{ end }}
+
+{{ if gt (.Paginator $totalList).TotalPages 1 }}
+  <nav class="pagination">
+    {{ if (.Paginator $totalList).HasNext }}
+      <a class="button" role="button" href="{{ trim (.Paginator $totalList).Next.URL "/" | absLangURL }}" data-rel="prefetch">« Older</a>
+    {{ else }} <span></span> {{ end }}
+    {{ if (.Paginator $totalList).HasPrev }}
+      <a class="button" role="button" href="{{ trim (.Paginator $totalList).Prev.URL "/" | absLangURL }}" data-rel="prefetch">Newer »</a>
+    {{ else }} <span></span> {{ end }}
+  </nav>
+{{ end }}
