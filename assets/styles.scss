@@ -12,6 +12,9 @@ html {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   font-size: 16px;
+  @media(max-width: 500px) {
+    font-size: 15px;
+  }
 }
 
 body {
@@ -23,9 +26,19 @@ body {
   min-height: 100vh;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  @media(max-width: 500px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+hr {
+  @include themify($themes) {
+    border-top: 0.001rem solid themed('color-text');
+  }
 }
 
 main {
@@ -72,6 +85,13 @@ summary {
   cursor: pointer;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: unset;
+  @include themify($themes) {
+    color: themed('color-green');
+  }
+}
+
 time {
   @include themify($themes) {
     color: themed('color-red');
@@ -89,15 +109,6 @@ time {
   }
 }
 
-i:not(.no-sup) {
-  font-size: 0.8rem;
-  vertical-align: 0.4rem;
-}
-
-i.fa-font-awesome-flag {
-  font-size: 0.6rem;
-}
-
 .header {
   &__upper {
     display: flex;
@@ -108,14 +119,23 @@ i.fa-font-awesome-flag {
   &__title {
     flex: 2;
     margin: .5rem 0;
+    font-size: 1.7rem;
     @media(max-width: 500px) {
       font-weight: unset;
       font-size: 1.2rem;
     }
   }
   &__toggler {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     border: none;
     height: 100%;
+  }
+  &__navbutton {
+    margin-right: .7rem;
+    padding: .4rem .9rem;
+    @include themify($themes) {
+      border: dotted 1px themed('color-blue');
+      color: themed('color-blue');
+    }
   }
 }

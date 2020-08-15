@@ -1,12 +1,5 @@
 {{ if or (eq .Type "notes") (eq .Type "responses") }}
   {{- partial "content/summary-card.html" . -}}
 {{ else }}
-  <article class="summary h-entry">
-    <h2 class="summary__title">{{.Title}}</h2>
-    <p>{{ if isset .Params "description" }}{{ .Params.Description | safeHTML }}{{ else }}{{ .Summary | safeHTML }}{{ end }}</p>
-    <a class="button" role="button"
-      href="{{.Permalink}}"
-      data-rel="prefetch"
-      aria-label="keep reading {{.Title}}">Read More »</a>
-  </article>
+  {{- partial "content/summary-post.html" . -}}
 {{ end }}

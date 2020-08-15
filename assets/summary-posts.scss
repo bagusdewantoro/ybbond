@@ -1,0 +1,14 @@
+@import "variables";
+
+.summary.posts {
+  display: block;
+  @include themify($themes) {
+    outline: .3rem solid themed('color-background-hover');
+  }
+  padding: .3rem 1.4rem;
+  margin-top: 2rem;
+}
+
+.summary__title {
+  margin: 0;
+}

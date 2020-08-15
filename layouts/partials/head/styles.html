@@ -7,6 +7,11 @@
       {{ .Content | safeCSS }}
     {{ end }}
   {{ end }}
+  {{ if .Page.IsHome }}
+    {{ with resources.Get "summary-posts.scss" | resources.ToCSS | resources.Minify }}
+      {{ .Content | safeCSS }}
+    {{ end }}
+  {{ end }}
   {{- if and (or (eq .Page.Type "posts") (eq .Page.Type "reports")) (eq .Page.Kind "page") -}}
     {{ with resources.Get "content-posts.scss" | resources.ToCSS | resources.Minify }}
       {{ .Content | safeCSS }}

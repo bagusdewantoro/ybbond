@@ -1,0 +1,15 @@
+<article class="summary posts h-entry">
+  <h2 class="summary__title">{{.Title}}</h2>
+  <p>
+    <time title="{{ .Date.Format "Monday, 02 January 2006 on 15:04:05" }} GMT+7" class="card__title__date dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05" }}+07:00">
+      {{ .Date.Format "02 Jan 2006" }}
+    </time>
+    <span>- {{ range .Params.Tags }}
+    <a class="tagitem" href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">#{{ . }}</a>&nbsp;{{ end }}</span>
+  </p>
+  <p>{{ if isset .Params "description" }}{{ .Params.Description | safeHTML }}{{ else }}{{ .Summary | safeHTML }}{{ end }}</p>
+  <a class="button" role="button"
+    href="{{.Permalink}}"
+    data-rel="prefetch"
+    aria-label="keep reading {{.Title}}">Read More »</a>
+</article>

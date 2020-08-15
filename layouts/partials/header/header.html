@@ -18,6 +18,7 @@
     {{ range .Site.Menus.main }}
       {{ $url := trim .URL "/" | absURL }}
       <button
+        class="header__navbutton"
         data-rel="prefetch"
         {{ if eq $.RelPermalink (print .URL "/") }}
           id="active"
@@ -33,6 +34,7 @@
     {{ range .Site.Menus.main }}
       {{ $url := trim .URL "/" | absURL }}
       <button
+        class="header__navbutton"
         data-rel="prefetch"
         {{ if eq $.RelPermalink (print .URL "/") }}
           id="active"
