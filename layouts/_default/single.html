@@ -3,4 +3,7 @@
     <h1>{{ .Title }}</h1>
     {{ .Content }}
   </article>
+  {{ with .Params.Comment.Issue }}
+    {{ partial "components/comments.html" . }}
+  {{ end }}
 {{ end }}

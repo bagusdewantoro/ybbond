@@ -5,6 +5,8 @@ description: I am currently refactoring my site. The main goal is to reduce page
 tags:
   - meta #meta
   - webdev #webdev
+comment:
+  issue: 599
 slug: refactoring-my-site
 date: 2020-08-15T19:51:36+0700
 ID: 20200815195136
